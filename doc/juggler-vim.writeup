@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-This is a mirror of http://www.vim.org/scripts/script.php?script_id=2050
-
 LustyJuggler is a high speed buffer juggler.  Having to consciously think about which buffer you need to switch to sucks, so use this instead.
 
 Someone made a screen cast showing it in action (jump to 6:20):
@@ -39,18 +36,10 @@ If you changed your mind, cancel the juggler with any of "q", "<ESC>", "<C-c", "
 If you like LustyJuggler, you may also like LustyExplorer: vimscript #1890
 
 Development repository: http://github.com/sjbach/lusty
-=======
-These are a set of plugins for Vim.  You can download released versions here:
 
-  lusty-explorer.vim: http://www.vim.org/scripts/script.php?script_id=1890
-  lusty-juggler.vim:  http://www.vim.org/scripts/script.php?script_id=2050
+install details
+Copy the script into your $HOME/.vim/plugin directory so that it will be sourced on startup.
 
-The Emacs version of this plugin used to be here, too, but now it has its own
-repository:
+NOTE: This plugin requires Vim be compiled with Ruby interpretation.  If you do not currently have this functionality, see the "Install Details:" section of the script for directions on adding it.  It's not too tough.
 
-  http://github.com/sjbach/lusty-emacs
-
-NOTE: lusty-explorer.vim and lusty-juggler.vim are generated files; modify
-src/ if you'd like to submit a patch.
-
->>>>>>> 14b0e0eb03a857cb5290c3eb1ada9ab5b57f623e
+Also: prior to Vim 7.3.32, LustyJuggler can interact poorly with plugins such as YankRing or SuperTab that remap common normal mode keys such as "d" (for dd, dw, etc.)
