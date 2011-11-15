@@ -569,6 +569,10 @@ class LustyJuggler
       map_key("v", ":call <SID>LustyJugglerKeyPressed('v')<CR>")
       map_key("b", ":call <SID>LustyJugglerKeyPressed('b')<CR>")
 
+      # Close buffers
+      map_key("w", ":call <SID>LustyJugglerKeyPressed('w')<CR>")
+      map_key("o", ":call <SID>LustyJugglerKeyPressed('o')<CR>")
+
       # Left and Right keys
       map_key("<Esc>OD", ":call <SID>LustyJugglerKeyPressed('Left')<CR>")
       map_key("<Esc>OC", ":call <SID>LustyJugglerKeyPressed('Right')<CR>")
@@ -598,6 +602,14 @@ class LustyJuggler
         cleanup()
       elsif @last_pressed and %w(v b).include?(c)
         c=='v' ? vsplit(@last_pressed) : hsplit(@last_pressed)
+        cleanup()
+      elsif @last_pressed and c == 'w'
+        kill_buffer(@last_pressed)
+        @last_pressed = nil
+        print_buffer_list()
+      elsif @last_pressed and c == 'o'
+        only_buffer(@last_pressed)
+        @last_pressed = nil
         cleanup()
       elsif c == 'Left'
         @last_pressed = (@last_pressed.nil?) ? 0 : (@last_pressed)
@@ -630,6 +642,9 @@ class LustyJuggler
 
       unmap_key("v")
       unmap_key("b")
+
+      unmap_key("o")
+      unmap_key("w")
 
       unmap_key("i")
       unmap_key("q")
@@ -682,6 +697,17 @@ class LustyJuggler
     def hsplit(i)
       buf = $lj_buffer_stack.num_at_pos(i)
       VIM::command "sb #{buf}"
+    end
+
+    def kill_buffer(i)
+      buf = $lj_buffer_stack.num_at_pos(i)
+      VIM::command "bd #{buf}"
+    end
+
+    def only_buffer(i)
+      buf = $lj_buffer_stack.num_at_pos(i)
+      VIM::command "b #{buf}"
+      VIM::command "Bonly"
     end
 
     def map_key(key, action)
